@@ -8,7 +8,7 @@
             <div>
                 <h3 class="text-xl font-bold mb-4">Contact</h3>
                 <p class="text-gray-400">Email: contact@senlibrairie.com</p>
-                <p class="text-gray-400">Tél: +221 XX XXX XX XX</p>
+                <p class="text-gray-400">Tél: +221 76 372 73 42</p>
             </div>
             <div>
                 <h3 class="text-xl font-bold mb-4">Suivez-nous</h3>
@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="border-t border-gray-700 pt-8 text-center">
-            <p class="text-gray-400">&copy; 2024 SenLibrairie. Tous droits réservés.</p>
+            <p class="text-gray-400">&copy; 2025 SenLibrairie. Tous droits réservés.</p>
         </div>
     </div>
 </footer>
