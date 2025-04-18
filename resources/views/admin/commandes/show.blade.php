@@ -17,24 +17,7 @@
                 <p class="text-gray-600">Passée le {{ $commande->created_at->format('d/m/Y à H:i') }}</p>
                 <p class="text-gray-600">Client: {{ $commande->client->name }}</p>
             </div>
-            <div>
-                <form action="{{ route('commandes.update-status', $commande) }}" method="POST">
-                    @csrf
-                    @method('PUT')
-                    <select name="statut" onchange="this.form.submit()" 
-                        class="rounded-full px-4 py-2
-                        @if($commande->statut == 'En attente') bg-yellow-100 text-yellow-800
-                        @elseif($commande->statut == 'En préparation') bg-blue-100 text-blue-800
-                        @elseif($commande->statut == 'Expédiée') bg-green-100 text-green-800
-                        @else bg-gray-100 text-gray-800
-                        @endif">
-                        <option value="En attente" @selected($commande->statut == 'En attente')>En attente</option>
-                        <option value="En préparation" @selected($commande->statut == 'En préparation')>En préparation</option>
-                        <option value="Expédiée" @selected($commande->statut == 'Expédiée')>Expédiée</option>
-                        <option value="Payée" @selected($commande->statut == 'Payée')>Payée</option>
-                    </select>
-                </form>
-            </div>
+          
         </div>
 
         <div class="border-t border-b border-gray-200 py-4 my-4">

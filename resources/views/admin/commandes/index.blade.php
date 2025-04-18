@@ -30,6 +30,7 @@
                             @csrf
                             @method('PUT')
                             <select name="statut" onchange="this.form.submit()" 
+                                {{ $commande->statut == 'Payée' ? 'disabled' : '' }}
                                 class="rounded-full text-sm px-3 py-1 
                                 @if($commande->statut == 'En attente') bg-yellow-100 text-yellow-800
                                 @elseif($commande->statut == 'En préparation') bg-blue-100 text-blue-800
@@ -41,6 +42,7 @@
                                 <option value="Expédiée" @selected($commande->statut == 'Expédiée')>Expédiée</option>
                                 <option value="Payée" @selected($commande->statut == 'Payée')>Payée</option>
                             </select>
+                            <input type="hidden" name="montant" value="{{ $commande->montantTotal }}">
                         </form>
                     </td>
                     <td class="px-6 py-4 flex space-x-2">

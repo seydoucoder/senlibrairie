@@ -88,13 +88,23 @@ class CommandeController extends Controller
     public function updateStatus(Request $request, Commande $commande)
     {
         $oldStatus = $commande->statut;
-        $commande->update(['statut' => $request->statut]);
-    
+        $commande->statut = $request->statut;
+        $commande->save();
+
         if ($request->statut === 'Expédiée' && $oldStatus !== 'Expédiée') {
             $commande->client->notify(new OrderShippedNotification($commande));
         }
 
-        return back()->with('success', 'Statut de la commande mis à jour');
+        if ($request->statut === 'Payée' && !$commande->paiement) {
+            Paiement::create([
+                'commande_id' => $commande->id,
+                'montant' => $request->montant,
+                'datePaiement' => now(),
+                'modePaiement' => 'Espèces'
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Statut de la commande mis à jour');
     }
 
     public function destroy(Commande $commande)

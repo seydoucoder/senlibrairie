@@ -31,8 +31,10 @@
             @foreach($livresPopulaires as $book)
                 <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
                     <div class="relative">
+                        <a href="{{ route('books.show', $book->id) }}">
                         <img src="{{ $book->image ?? asset('images/placeholder.jpg') }}" alt="{{ $book->titre }}" 
-                            class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
+                        class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
+                        </a>
                         @if($book->est_nouveau)
                             <div class="absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded-full text-sm">
                                 Nouveau
@@ -45,9 +47,13 @@
                         <div class="flex justify-between items-center">
                             <span class="text-2xl font-bold text-blue-600">{{ number_format($book->prix, 0, ',', '.') }} FCFA</span>
                             @auth
-                                <button class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition duration-300 flex items-center">
-                                    <i class="fas fa-shopping-cart mr-2"></i> Ajouter
-                                </button>
+                            <form action="{{ route('cart.add', $book->id) }}" method="POST" class="inline">
+                                    @csrf
+                                    <input type="hidden" name="quantity" value="1">
+                                    <button type="submit" class="bg-blue-600 text-white px-4 py-1.5 rounded-full hover:bg-blue-700 transition duration-300 flex items-center text-sm">
+                                        <i class="fas fa-shopping-cart mr-1"></i> Ajouter
+                                    </button>
+                                </form>
                             @else
                                 <a href="{{ route('login') }}" class="bg-gray-600 text-white px-6 py-2 rounded-full hover:bg-gray-700 transition duration-300 flex items-center">
                                     <i class="fas fa-lock mr-2"></i> Se connecter

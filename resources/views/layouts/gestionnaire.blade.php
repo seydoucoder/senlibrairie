@@ -6,52 +6,61 @@
     <title>@yield('title') - SenLibrairie Admin</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body class="bg-gray-100">
-    <nav class="bg-white shadow-lg">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex justify-between h-16">
-                <div class="flex">
-                    <div class="flex-shrink-0 flex items-center">
-                        <span class="text-xl font-bold text-blue-600">SenLibrairie</span>
-                    </div>
-                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-                        <a href="{{ route('dashboard') }}" class="border-b-2 border-blue-500 text-gray-900 inline-flex items-center px-1 pt-1 text-sm font-medium">
-                            <i class="fas fa-chart-line mr-2"></i> Tableau de bord
-                        </a>
-                        <a href="{{ route('books.manage') }}" class="border-transparent hover:border-gray-300 text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                            <i class="fas fa-book mr-2"></i> Gérer les livres
-                        </a>
-                        <a href="{{ route('commandes.index') }}" class="border-transparent hover:border-gray-300 text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                            <i class="fas fa-shopping-bag mr-2"></i> Gestion des commandes
-                        </a>
-                        <a href="{{ route('paiements.index') }}" class="border-transparent hover:border-gray-300 text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                            <i class="fas fa-money-bill-wave mr-2"></i> Gestion des paiements
-                        </a>
-                        <a href="{{ route('users.index') }}" class="border-transparent hover:border-gray-300 text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                            <i class="fas fa-users mr-2"></i> Utilisateurs
-                        </a>
-                    </div>
-                </div>
-                <div class="flex items-center">
-                    <div class="ml-3 relative">
-                        <div class="flex items-center space-x-4">
-                            <span class="text-gray-700">{{ Auth::user()->name }}</span>
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <button type="submit" class="text-gray-700 hover:text-red-600">
-                                    <i class="fas fa-sign-out-alt"></i> Déconnexion
-                                </button>
-                            </form>
-                        </div>
-                    </div>
+<body>
+    <div class="flex">
+        <!-- Sidebar -->
+        <div class="w-64 h-screen bg-white shadow-lg fixed">
+            <div class="p-4">
+                <span class="text-xl font-bold text-blue-600">SenLibrairie</span>
+            </div>
+            <nav class="mt-4">
+                <a href="{{ route('dashboard') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600">
+                    <i class="fas fa-chart-line w-5"></i>
+                    <span class="mx-3">Tableau de bord</span>
+                </a>
+                <a href="{{ route('books.manage') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600">
+                    <i class="fas fa-book w-5"></i>
+                    <span class="mx-3">Gérer les livres</span>
+                </a>
+                <a href="{{ route('commandes.index') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600">
+                    <i class="fas fa-shopping-bag w-5"></i>
+                    <span class="mx-3">Gestion des commandes</span>
+                </a>
+                <a href="{{ route('paiements.index') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600">
+                    <i class="fas fa-money-bill-wave w-5"></i>
+                    <span class="mx-3">Gestion des paiements</span>
+                </a>
+                <a href="{{ route('users.index') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600">
+                    <i class="fas fa-users w-5"></i>
+                    <span class="mx-3">Utilisateurs</span>
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 ml-64">
+            <!-- Top bar -->
+            <div class="bg-white shadow-sm p-4">
+                <div class="flex justify-end items-center">
+                    <span class="text-gray-700 mr-4">{{ Auth::user()->name }}</span>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="text-gray-700 hover:text-red-600">
+                            <i class="fas fa-sign-out-alt"></i> Déconnexion
+                        </button>
+                    </form>
                 </div>
             </div>
-        </div>
-    </nav>
 
-    <main class="py-4">
-        @yield('content')
-    </main>
+            <!-- Page Content -->
+            <div class="p-6">
+                @yield('content')
+            </div>
+        </div>
+    </div>
+    
+    @stack('scripts')
 </body>
 </html>

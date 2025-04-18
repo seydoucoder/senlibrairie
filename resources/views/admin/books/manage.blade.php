@@ -43,7 +43,7 @@
                             <div class="text-sm text-gray-500">{{ $book->auteur }}</div>
                         </td>
                         <td class="px-6 py-4">
-                            <div class="text-sm text-gray-900">{{ $book->category->nom }}</div>
+                            <div class="text-sm text-gray-900">{{ $book->category->name }}</div>
                         </td>
                         <td class="px-6 py-4">
                             <div class="text-sm text-gray-900">{{ number_format($book->prix, 0, ',', ' ') }} FCFA</div>
